@@ -1,0 +1,42 @@
+<Entity>
+
+	<LifetimeComponent
+		lifetime="2"
+	></LifetimeComponent>
+
+    <SpriteParticleEmitterComponent
+		_enabled="1"
+		sprite_file=""
+		sprite_centered="1"
+		delay="0"
+		lifetime="0.22"
+		color.r="0.9" color.g="0.5" color.b="1" color.a="0.9"
+		color_change.r="0" color_change.g="0" color_change.b="0" color_change.a="0"
+    	velocity.x="0" velocity.y="190"
+        gravity.x="0" gravity.y="80"
+        velocity_slowdown="0.6"
+        rotation="1.5708"
+        angular_velocity="0"
+		use_rotation_from_entity="0"
+        use_velocity_as_rotation="0"
+        scale.x="1" scale.y="1"
+        scale_velocity.x="0" scale_velocity.y="0"
+        emission_interval_min_frames="0"
+        emission_interval_max_frames="0"
+        count_min="1" count_max="1"
+        randomize_rotation.min="0"
+        randomize_rotation.max="0"
+        randomize_angular_velocity.min="0"
+        randomize_angular_velocity.max="0"
+        randomize_position.min_x="0"
+        randomize_position.max_x="0"
+        randomize_position.min_y="-8"
+        randomize_position.max_y="-8"
+        randomize_velocity.min_x="0"
+        randomize_velocity.max_x="0"
+        randomize_velocity.min_y="0"
+        randomize_velocity.max_y="0"
+        velocity_always_away_from_center="0" >
+	</SpriteParticleEmitterComponent>
+
+</Entity>
