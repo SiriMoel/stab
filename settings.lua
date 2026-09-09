@@ -1,22 +1,26 @@
 dofile("data/scripts/lib/mod_settings.lua")
 
-function mod_setting_bool_ff(mod_id, gui, in_main_menu, im_id, setting)
+function mod_setting_bool_stab(mod_id, gui, in_main_menu, im_id, setting)
 	local value = ModSettingGetNextValue( mod_setting_get_id(mod_id,setting) )
 	if type(value) ~= "boolean" then value = setting.value_default or false end
 
-	local text = GameTextGet(value and "$ff_setting_on" or "$ff_setting_off")
+	local text = GameTextGet(value and "$stab_setting_on" or "$stab_setting_off")
+
+	if in_main_menu then
+		text = value and "ON!" or "Off"
+	end
 
     if value then
-        GuiColorSetForNextWidget(gui, 1.0, 0.9, 0.7, 1.0)
+        GuiColorSetForNextWidget(gui, 0.9, 0.7, 1.0, 1.0)
     else
-        GuiColorSetForNextWidget(gui, 0.4, 0.4, 0.6, 1.0)
+        GuiColorSetForNextWidget(gui, 0.5, 0.3, 0.3, 1.0)
     end
 
 	GuiText(gui, mod_setting_group_x_offset, 0, text, 1, "", true)
 
     GuiColorSetForNextWidget(gui, 0.6, 0.6, 0.6, 1)
 
-    local clicked,right_clicked = GuiButton( gui, im_id, mod_setting_group_x_offset + 24, -11, setting.ui_name )
+    local clicked,right_clicked = GuiButton(gui, im_id, mod_setting_group_x_offset + 24, -11, setting.ui_name)
 
     GuiColorSetForNextWidget(gui, 1, 1, 1, 1)
 
@@ -33,66 +37,49 @@ function mod_setting_bool_ff(mod_id, gui, in_main_menu, im_id, setting)
 	mod_setting_tooltip( mod_id, gui, in_main_menu, setting )
 end
 
-function mod_setting_enum_ff(mod_id, gui, in_main_menu, im_id, setting)
-	local value = ModSettingGetNextValue( mod_setting_get_id(mod_id,setting) )
-	if type(value) ~= "string" then value = setting.value_default or "" end
-
-	local value_id = 1
-	for i,val in ipairs(setting.values) do
-		if val[1] == value then
-			value_id = i
-			break
-		end
-	end
-
-	local text = setting.values[value_id][2]
-
-    local p = value_id / #setting.values
-
-    GuiColorSetForNextWidget(gui, 0.6 + 0.4 * p, 0.9 - 0.4 * p, 0.3 + 0.4 * p, 1.0)
-
-	GuiText(gui, mod_setting_group_x_offset, 0, text, 1, "", true)
-	
-    GuiColorSetForNextWidget(gui, 0.6, 0.6, 0.6, 1)
-
-    local clicked,right_clicked = GuiButton(gui, im_id, mod_setting_group_x_offset + 24, -11, setting.ui_name)
-
-    GuiColorSetForNextWidget(gui, 1, 1, 1, 1)
-
-    if clicked then
-		local value_old = value
-		value_id = value_id + 1
-		if value_id > #(setting.values) then
-			value_id = 1
-		end
-		value = setting.values[value_id][1]
-		ModSettingSetNextValue( mod_setting_get_id(mod_id,setting), value, false  )
-		mod_setting_handle_change_callback( mod_id, gui, in_main_menu, setting, value_old, value )
-	end
-	if right_clicked and setting.value_default then
-		ModSettingSetNextValue( mod_setting_get_id(mod_id,setting), setting.value_default, false  )
-		mod_setting_handle_change_callback( mod_id, gui, in_main_menu, setting, value, setting.value_default )
-	end
-
-	mod_setting_tooltip( mod_id, gui, in_main_menu, setting )
-end
-
-function mod_setting_image_small(mod_id, gui, in_main_menu, im_id, setting)
-	GuiImage(gui, im_id, mod_setting_group_x_offset, 0, setting.image_filename, 1, 0.5, 0)
-
-	if is_visible_string(setting.ui_description) then
-		GuiTooltip(gui, setting.ui_description, "")
-	end
-end
-
 function mod_setting_change_callback(mod_id, gui, in_main_menu, setting, old_value, new_value)
 
 end
 
-local mod_id = "foolish_flame"
+local mod_id = "stab"
 mod_settings_version = 1
 mod_settings = {
-	
+	{
+        id = "spell_STAB",
+        ui_name = "Spell: Big Earner",
+        ui_description = "Should this spell exist?",
+        value_default = true,
+        scope = MOD_SETTING_SCOPE_NEW_GAME,
+        ui_fn = mod_setting_bool_stab,
+        value_type = "boolean",
+    },
+	{
+        id = "spell_FIRE",
+        ui_name = "Spell: Stabbing Fire",
+        ui_description = "Should this spell exist?",
+        value_default = true,
+        scope = MOD_SETTING_SCOPE_NEW_GAME,
+        ui_fn = mod_setting_bool_stab,
+        value_type = "boolean",
+    },
+	{
+        id = "spell_MISERICORDE",
+        ui_name = "Spell: Minä's Misericorde",
+        ui_description = "Should this spell exist?",
+        value_default = true,
+        scope = MOD_SETTING_SCOPE_NEW_GAME,
+        ui_fn = mod_setting_bool_stab,
+        value_type = "boolean",
+    },
+	{
+        id = "spell_BUFF",
+        ui_name = "Spell: Essence Extractor",
+        ui_description = "Should this spell exist?",
+        value_default = true,
+        scope = MOD_SETTING_SCOPE_NEW_GAME,
+        ui_fn = mod_setting_bool_stab,
+        value_type = "boolean",
+    },
 }
 
 function ModSettingsUpdate(init_scope)
