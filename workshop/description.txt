@@ -1,1 +1,21 @@
-i am the spy
+[stab title]
+
+This mod adds a handful of spells used to perform special close-range attacks.
+When using these spells, an indicator will appear when you are close enough to an enemy to attack:
+[stab indicator in game image]
+
+Stab! adds [b]7[/b] spells, which can each be toggled on/off in the mod's settings:
+[big earner]
+[stabbing fire]
+[misericorde]
+[getaway]
+[essence extractor]
+[stabage]
+[stab power]
+
+Cross-mod interactions:
+[b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3795285917]Foolish Flame[/url][/b] 'Stabbing Fire' spell inflicts magic fire
+[b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3313573016]Souls[/url][/b] 'Essence Extractor' spell grants souls
+
+Discord: https://discord.gg/FKaRA9HMUq
+Github: https://github.com/SiriMoel/stab

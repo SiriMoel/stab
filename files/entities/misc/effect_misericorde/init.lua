@@ -9,9 +9,10 @@ if EntityHasTag(root, "player_unit") then
     if dmc ~= nil then
         local max_hp = ComponentGetValue2(dmc, "max_hp")
         local hp = ComponentGetValue2(dmc, "hp")
+        local amt = ComponentGetValue2(comp_amt, "value_float")
         ComponentSetValue2(comp_max_hp, "value_float", max_hp)
         --ComponentSetValue2(comp_hp, "value_float", hp)
-        local amt = math.max(max_hp * 0.4, 0.4)
+        amt = math.max(max_hp * amt, 0.4)
         ComponentSetValue2(comp_amt, "value_float", amt)
         ComponentSetValue2(dmc, "max_hp", max_hp + amt)
         ComponentSetValue2(dmc, "hp", hp + amt)

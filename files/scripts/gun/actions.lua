@@ -30,21 +30,18 @@ local new_actions = {
 					local comp_stab_entity = EntityGetFirstComponentIncludingDisabled(caster, "VariableStorageComponent", "stab_target")
 					if comp_stab_entity ~= nil then
 						local stab_target = ComponentGetValue2(comp_stab_entity, "value_int")
-						local damage = 2.8
-						if hand ~= nil then
-							for i,v in ipairs(hand) do
-								if v.id == "STAB_STABAGE" then
-									damage = damage * STABAGE_DAMAGE_MULT
-								end
-							end
-						end
+						local damage = 2.8 * c.stab_stab_stab
 						GamePrint(count)
 						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 						Stabfx(caster, stab_target)
 					end						
 					local effects = EntityGetAllChildren(caster, "stab_big_earner") or {}
 					if #effects == 0 then
-						LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_big_earner.xml")
+						local effect_entity = LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_big_earner.xml")
+						local gec = EntityGetFirstComponent(effect_entity, "GameEffectComponent")
+						if gec ~= nil then
+							ComponentSetValue2(gec, "frames", 250 + 60 * c.stab_power)
+						end
 					end	
 					c.fire_rate_wait = c.fire_rate_wait + 48
 					current_reload_time = current_reload_time + 48
@@ -84,19 +81,14 @@ local new_actions = {
 					if comp_stab_entity ~= nil then
 						local stab_target = ComponentGetValue2(comp_stab_entity, "value_int")
 						local effect_comp, effect_entity = GetGameEffectLoadTo(stab_target, "ON_FIRE", true)
-						ComponentSetValue2(effect_comp, "frames", 600)
+						ComponentSetValue2(effect_comp, "frames", 540 + 60 * c.stab_power)
 						if ModIsEnabled("foolish_flame") then
 							dofile_once("mods/foolish_flame/files/scripts/utils.lua")
-							InflictMagicFire(stab_target, 5, 600, 10)
+							local temperature = math.min(5 + c.stab_power, 10)
+							local duration = 540 + 120 * c.stab_power
+							InflictMagicFire(stab_target, temperature, duration, 10)
 						end
-						local damage = 4
-						if hand ~= nil then
-							for i,v in ipairs(hand) do
-								if v.id == "STAB_STABAGE" then
-									damage = damage * STABAGE_DAMAGE_MULT
-								end
-							end
-						end
+						local damage = 4 * c.stab_stab_stab
 						EntityInflictDamage(stab_target, damage * 0.43, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 						EntityInflictDamage(stab_target, damage * 0.57, "DAMAGE_FIRE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 						Stabfx(caster, stab_target)
@@ -137,20 +129,17 @@ local new_actions = {
 					local comp_stab_entity = EntityGetFirstComponentIncludingDisabled(caster, "VariableStorageComponent", "stab_target")
 					if comp_stab_entity ~= nil then
 						local stab_target = ComponentGetValue2(comp_stab_entity, "value_int")
-						local damage = 1
-						if hand ~= nil then
-							for i,v in ipairs(hand) do
-								if v.id == "STAB_STABAGE" then
-									damage = damage * STABAGE_DAMAGE_MULT
-								end
-							end
-						end
+						local damage = 1 * c.stab_stab_stab
 						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 						Stabfx(caster, stab_target)
 					end						
 					local effects = EntityGetAllChildren(caster, "stab_misericorde") or {}
 					if #effects == 0 then
-						LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_misericorde/effect.xml")
+						local effect_entity = LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_misericorde/effect.xml")
+						local comp_mis_amt = EntityGetFirstComponentIncludingDisabled(effect_entity, "VariableStorageComponent", "mis_amt")
+						if comp_mis_amt ~= nil then
+							ComponentSetValue2(comp_mis_amt, "value_float", 0.4 + 0.15 * c.stab_power)
+						end
 					end	
 					c.fire_rate_wait = c.fire_rate_wait + 84
 					current_reload_time = current_reload_time + 84
@@ -188,14 +177,7 @@ local new_actions = {
 					local comp_stab_entity = EntityGetFirstComponentIncludingDisabled(caster, "VariableStorageComponent", "stab_target")
 					if comp_stab_entity ~= nil then
 						local stab_target = ComponentGetValue2(comp_stab_entity, "value_int")
-						local damage = 4
-						if hand ~= nil then
-							for i,v in ipairs(hand) do
-								if v.id == "STAB_STABAGE" then
-									damage = damage * STABAGE_DAMAGE_MULT
-								end
-							end
-						end
+						local damage = 4 * c.stab_stab_stab
 						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 						Stabfx(caster, stab_target)
 					end						
@@ -224,7 +206,11 @@ local new_actions = {
 					if done then
 						local effects = EntityGetAllChildren(caster, "stab_getaway") or {}
 						if #effects == 0 then
-							LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_getaway.xml")
+							local effect_entity = LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_getaway.xml")
+							local gec = EntityGetFirstComponent(effect_entity, "GameEffectComponent")
+							if gec ~= nil then
+								ComponentSetValue2(gec, "frames", 900 + 90 * c.stab_power)
+							end
 						end	
 					end
 					c.fire_rate_wait = c.fire_rate_wait + 42
@@ -270,18 +256,12 @@ local new_actions = {
 							dofile_once("mods/souls/files/scripts/souls.lua")
 							ReapSoul(stab_target, Random(1, 3), false)
 						end
-						local damage = 2.4
-						if hand ~= nil then
-							for i,v in ipairs(hand) do
-								if v.id == "STAB_STABAGE" then
-									damage = damage * STABAGE_DAMAGE_MULT
-								end
-							end
-						end
+						local damage = 2.4 * c.stab_stab_stab
 						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 					end
 					local effects = EntityGetAllChildren(caster, "stab_effect_buff") or {}
-					if #effects < 5 then
+					local max = math.min(5 + c.stab_power, 14)
+					if #effects < max then
 						local effect = EntityLoad("mods/stab/files/entities/misc/effect_buff.xml", x, y)
 						EntityAddChild(caster, effect)
 					end
@@ -307,6 +287,24 @@ local new_actions = {
 		ai_never_uses = true,
 		action = function()
 			current_reload_time = current_reload_time + 12
+			c.stab_stab_stab = c.stab_stab_stab + 0.5
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id = "POWER",
+		name = "$action_stab_power",
+		description = "$actiondesc_stab_power",
+		sprite = "mods/stab/files/ui_gfx/gun_actions/power.png",
+		type = ACTION_TYPE_OTHER, -- not a modifier because it doesn't modify a projectile
+		spawn_level = "10",
+		spawn_probability = "0",
+		price = 200,
+		mana = 30,
+		ai_never_uses = true,
+		action = function()
+			current_reload_time = current_reload_time + 12
+			c.stab_power = c.stab_power + 1
 			draw_actions(1, true)
 		end,
 	},

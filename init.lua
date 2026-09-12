@@ -4,6 +4,7 @@ local nxml = dofile_once("mods/stab/lib/nxml.lua")
 
 -- appends
 ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/stab/files/scripts/gun/actions.lua")
+ModLuaFileAppend("data/scripts/gun/gun.lua", "mods/stab/files/scripts/gun/gun_append.lua")
 
 -- translations
 local translations = ModTextFileGetContent("data/translations/common.csv")

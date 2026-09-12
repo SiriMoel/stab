@@ -98,6 +98,15 @@ mod_settings = {
         ui_fn = mod_setting_bool_stab,
         value_type = "boolean",
     },
+    {
+        id = "spell_POWER",
+        ui_name = "Spell: Stab! Power",
+        ui_description = "Should this spell exist?",
+        value_default = true,
+        scope = MOD_SETTING_SCOPE_NEW_GAME,
+        ui_fn = mod_setting_bool_stab,
+        value_type = "boolean",
+    },
 }
 
 function ModSettingsUpdate(init_scope)
