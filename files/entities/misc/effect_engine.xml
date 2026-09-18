@@ -1,0 +1,22 @@
+<Entity tags="stab_effect_engine">
+
+    <InheritTransformComponent>
+    </InheritTransformComponent>    
+
+	<GameEffectComponent 
+    	effect="CUSTOM"
+		custom_effect_id="STAB_ENGINE"
+    	frames="300"
+    ></GameEffectComponent>
+	
+	<UIIconComponent
+		icon_sprite_file="mods/stab/files/ui_gfx/status_indicators/engine.png"
+		name="$status_stab_engine"
+		description="$statusdesc_stab_engine"
+		display_above_head="0"
+		display_in_hud="1"
+		is_perk="0"
+		>
+	</UIIconComponent>
+
+</Entity>

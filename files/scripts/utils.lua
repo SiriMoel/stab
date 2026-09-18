@@ -1,6 +1,9 @@
 dofile_once("data/scripts/lib/utilities.lua")
 
 STAB_RANGE = 34
+if GameHasFlagRun("stab_init") then
+    STAB_RANGE = tonumber(GlobalsGetValue("stab_stab_range", "34"))
+end
 
 function table.contains(table, element)
     for _, value in pairs(table) do
@@ -8,6 +11,14 @@ function table.contains(table, element)
         return true
     end
 end
+    return false
+end
+
+function CreateStabSpell(spell, x, y)
+    if ModSettingGet("stab.spell_" .. spell) then
+        CreateItemActionEntity("STAB_" .. spell, x, y)
+        return true
+    end
     return false
 end
 

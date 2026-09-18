@@ -1,21 +1,6 @@
-<Entity>
-	
-	<Base file="data/entities/base_custom_card.xml"> 
-		<SpriteComponent 
-			image_file="mods/stab/files/ui_gfx/gun_actions/buff.png"
-			>
-		</SpriteComponent>
-		
-		<ItemActionComponent 
-			_tags="enabled_in_world"
-			action_id="STAB_BUFF" >
-		</ItemActionComponent>
-	</Base>
+<Entity tags="stab_card">
 
-	<Base file="mods/stab/files/entities/misc/base_card_stab.xml"> 
-	</Base>
-
-	<!--<InheritTransformComponent
+	<InheritTransformComponent
 		_tags="enabled_in_world,enabled_in_hand" >
 	</InheritTransformComponent>
 
@@ -71,6 +56,6 @@
 		_tags="enabled_in_inventory,enabled_in_world"
         script_source_file="mods/stab/files/entities/misc/card_stab/card.lua"
         execute_every_n_frame="1"
-    ></LuaComponent>-->
+    ></LuaComponent>
 
 </Entity>

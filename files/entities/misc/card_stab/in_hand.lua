@@ -4,7 +4,7 @@ local card = GetUpdatedEntityID()
 
 local root = EntityGetRootEntity(card)
 
-if EntityHasTag(root, "player_unit") then
+if EntityHasTag(root, "player_unit") and (GlobalsGetValue("stab_show_stab_indicator", "true") == "true") then
     local x, y, r, sx, sy = EntityGetTransform(root)
     local can_stab, stab_val, stab_entity, mx = CanStab(root, card, x, y)
     if can_stab and mx == sx then

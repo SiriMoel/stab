@@ -1,7 +1,5 @@
 dofile_once("mods/stab/files/scripts/utils.lua")
 
-STABAGE_DAMAGE_MULT = 1.5
-
 local new_actions = {
 	{
 		id = "STAB",
@@ -31,7 +29,6 @@ local new_actions = {
 					if comp_stab_entity ~= nil then
 						local stab_target = ComponentGetValue2(comp_stab_entity, "value_int")
 						local damage = 2.8 * c.stab_stab_stab
-						GamePrint(count)
 						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 						Stabfx(caster, stab_target)
 					end						
@@ -275,10 +272,63 @@ local new_actions = {
 		end,
 	},
 	{
+		id = "ENGINE",
+		name = "$action_stab_engine",
+		description = "$actiondesc_stab_engine",
+		sprite = "mods/stab/files/ui_gfx/gun_actions/engine.png",
+		type = ACTION_TYPE_UTILITY,
+		spawn_level = "10",
+		spawn_probability = "0",
+		price = 200,
+		mana = 80,
+		ai_never_uses = true,
+		custom_xml_file="mods/stab/files/entities/misc/card_engine.xml",
+		action = function()
+			if reflecting then
+				c.damage_slice_add = c.damage_slice_add + 2.8
+				return
+			end
+			local caster = GetUpdatedEntityID()
+			if EntityHasTag(caster, "player_unit") then
+				local effects = EntityGetAllChildren(caster, "stab_effect_engine") or {}
+				local effect_count = #effects
+				local comp_stab = EntityGetFirstComponentIncludingDisabled(caster, "VariableStorageComponent", "stab_")
+				local can_stab = ComponentGetValue2(comp_stab, "value_bool")
+				if can_stab then
+					local x, y = EntityGetTransform(caster)
+					local comp_stab_entity = EntityGetFirstComponentIncludingDisabled(caster, "VariableStorageComponent", "stab_target")
+					if comp_stab_entity ~= nil then
+						local stab_target = ComponentGetValue2(comp_stab_entity, "value_int")
+						Stabfx(caster, stab_target)
+						local damage = 2.8 * c.stab_stab_stab
+						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
+					end
+					local max = math.min(3 + c.stab_power, 5)
+					if effect_count < max then
+						local effect = EntityLoad("mods/stab/files/entities/misc/effect_engine.xml", x, y)
+						EntityAddChild(caster, effect)
+						effect_count = effect_count + 1
+					end
+					c.fire_rate_wait = c.fire_rate_wait + 42
+					current_reload_time = current_reload_time + 42
+				else
+					mana = mana + 80
+					if effect_count > 0 then
+						c.fire_rate_wait = c.fire_rate_wait - 24 * effect_count
+						current_reload_time = current_reload_time  - 18 * effect_count
+					end
+				end
+				
+			end
+			draw_actions(1, true)
+		end,
+	},
+	{
 		id = "STABAGE",
 		name = "$action_stab_stabage",
 		description = "$actiondesc_stab_stabage",
 		sprite = "mods/stab/files/ui_gfx/gun_actions/stabage.png",
+		spawn_requires_flag = "stab_spell_acquired",
 		type = ACTION_TYPE_OTHER, -- not a modifier because it doesn't modify a projectile
 		spawn_level = "10",
 		spawn_probability = "0",
@@ -296,11 +346,12 @@ local new_actions = {
 		name = "$action_stab_power",
 		description = "$actiondesc_stab_power",
 		sprite = "mods/stab/files/ui_gfx/gun_actions/power.png",
+		spawn_requires_flag = "stab_spell_acquired",
 		type = ACTION_TYPE_OTHER, -- not a modifier because it doesn't modify a projectile
 		spawn_level = "10",
 		spawn_probability = "0",
 		price = 200,
-		mana = 30,
+		mana = 35,
 		ai_never_uses = true,
 		action = function()
 			current_reload_time = current_reload_time + 12

@@ -17,9 +17,46 @@ if translations ~= nil then
     ModTextFileSetContent("data/translations/common.csv", translations)
 end
 
+-- boss drops
+local bosses = {
+	"data/entities/animals/boss_alchemist/boss_alchemist.xml",
+	"data/entities/animals/boss_limbs/boss_limbs.xml",
+	"data/entities/animals/boss_pit/boss_pit.xml",
+	"data/entities/animals/boss_dragon.xml",
+	"data/entities/animals/boss_wizard/boss_wizard.xml",
+	"data/entities/animals/boss_fish/fish_giga.xml",
+	"data/entities/animals/boss_spirit/islandspirit.xml",
+	"data/entities/animals/boss_ghost/boss_ghost.xml",
+	"data/entities/animals/boss_meat/boss_meat.xml",
+	"data/entities/animals/boss_robot/boss_robot.xml",
+	"data/entities/animals/maggot_tiny/maggot_tiny.xml",
+	"data/entities/animals/parallel/alchemist/parallel_alchemist.xml",
+	"data/entities/animals/parallel/tentacles/parallel_tentacles.xml",
+}
+for _,path in ipairs(bosses) do
+    local xml = nxml.parse(ModTextFileGetContent(path))
+    xml:add_child(nxml.parse(([[
+        <LuaComponent
+            script_death="mods/stab/files/scripts/boss_death.lua"
+        ></LuaComponent>
+    ]])))
+    ModTextFileSetContent(path, tostring(xml))
+end
+
+
+function OnModPostInit()
+	if ModIsEnabled("foolish_flame") then
+		ModLuaFileAppend("mods/foolish_flame/files/scripts/bounty_rewards.lua", "mods/stab/files/scripts/ff_bounty_rewards.lua")
+		ModLuaFileAppend("mods/foolish_flame/files/scripts/gauges.lua", "mods/stab/files/scripts/ff_gauges.lua")
+	end
+end
+
 function OnPlayerSpawned(player)
     if GameHasFlagRun("stab_init") then return end
 	GameAddFlagRun("stab_init")
+
+	GlobalsSetValue("stab_show_stab_indicator", tostring(ModSettingGet("stab.show_stab_indicator")))
+	GlobalsSetValue("stab_stab_range", tostring(ModSettingGet("stab.stab_range")))
 
 	EntityAddComponent2(player, "VariableStorageComponent", {
 		_tags="stab_",
@@ -38,4 +75,13 @@ function OnPlayerSpawned(player)
 		name="stab_wand_sprite",
 		value_string=""
 	})
+end
+
+function OnPausedChanged(is_paused, is_inventory_pause)
+    if is_paused then
+		local show_stab_indicator = ModSettingGet("stab.show_stab_indicator") or false
+		GlobalsSetValue("stab_show_stab_indicator", tostring(show_stab_indicator))
+		local stab_range = ModSettingGet("stab.stab_range") or "34"
+		GlobalsSetValue("stab_stab_range", tostring(stab_range))
+	end
 end
