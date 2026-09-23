@@ -1,7 +1,7 @@
 local stab_rewards = {
     {
         id = "stab_spell",
-        chance = 0.9,
+        chance = 0.8,
         spawn_func = function(x, y) 
             SetRandomSeed(x, y)
             local num = Random(1, 3)

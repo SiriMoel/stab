@@ -34,13 +34,13 @@ local bosses = {
 	"data/entities/animals/parallel/tentacles/parallel_tentacles.xml",
 }
 for _,path in ipairs(bosses) do
-    local xml = nxml.parse(ModTextFileGetContent(path))
-    xml:add_child(nxml.parse(([[
-        <LuaComponent
-            script_death="mods/stab/files/scripts/boss_death.lua"
-        ></LuaComponent>
-    ]])))
-    ModTextFileSetContent(path, tostring(xml))
+    for content in nxml.edit_file(path) do
+        content:create_children(
+	        { LuaComponent = {
+	    		script_death="mods/stab/files/scripts/boss_death.lua"
+	    	}}
+        )
+    end
 end
 
 

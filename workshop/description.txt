@@ -1,10 +1,13 @@
-This mod adds a handful of spells used to perform special close-range attacks.
-When using these spells, an indicator will appear when you are close enough to an enemy to attack:
-[stab indicator in game image/gif]
+Stab! adds a handful of spells used to perform special close-range attacks for various buffs & effects.
+When using these spells, a raised wand will appear as an indicator that you are close enough to an enemy to Stab!
 
-Stab! adds [b]8[/b] spells, which can each be toggled on/off in the mod's settings.
+The mod adds [b]8[/b] spells, which can each be toggled on/off in the mod's settings.
+Here's an example of one:
+[big earner]
 
-Some of the spells drop from specific bosses, and the others can be obtained from shadow bosses in parallel worlds.
+The spells only cost mana and apply the recharge and cast delay time penalties when you Stab!, so you don't have to worry about them ruining your wands (they also cast the next spell, so they can be slotted in freely).
+
+The spells can be acquired from Noita's bosses.
 If Foolish Flame is enabled, the spells can also be acquired from hell bounties.
 
 Cross-mod interactions:

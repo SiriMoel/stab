@@ -54,7 +54,7 @@ local new_actions = {
 		name = "$action_stab_fire",
 		description = "$actiondesc_stab_fire",
 		sprite = "mods/stab/files/ui_gfx/gun_actions/stabbing_fire.png",
-		type = ACTION_TYPE_OTHER,
+		type = ACTION_TYPE_UTILITY,
 		spawn_level = "10",
 		spawn_probability = "0",
 		price = 200,
@@ -333,10 +333,10 @@ local new_actions = {
 		spawn_level = "10",
 		spawn_probability = "0",
 		price = 200,
-		mana = 30,
+		mana = 0, --mana = 30,
 		ai_never_uses = true,
 		action = function()
-			current_reload_time = current_reload_time + 12
+			--current_reload_time = current_reload_time + 12
 			c.stab_stab_stab = c.stab_stab_stab + 0.5
 			draw_actions(1, true)
 		end,
@@ -351,10 +351,10 @@ local new_actions = {
 		spawn_level = "10",
 		spawn_probability = "0",
 		price = 200,
-		mana = 35,
+		mana = 0, --mana = 35,
 		ai_never_uses = true,
 		action = function()
-			current_reload_time = current_reload_time + 12
+			--current_reload_time = current_reload_time + 12
 			c.stab_power = c.stab_power + 1
 			draw_actions(1, true)
 		end,
