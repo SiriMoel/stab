@@ -1,10 +1,10 @@
 local stab_rewards = {
     {
         id = "stab_spell",
-        chance = 0.8,
+        chance = 1.1,
         spawn_func = function(x, y) 
             SetRandomSeed(x, y)
-            local num = Random(1, 3)
+            local num = Random(1, 4)
             local opts = {}
             if num == 1 then
                 local possible_opts = {"STAB", "FIRE", "MISERICORDE", "GETAWAY", "BUFF", "ENGINE"}

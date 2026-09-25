@@ -39,7 +39,12 @@ local new_actions = {
 						if gec ~= nil then
 							ComponentSetValue2(gec, "frames", 250 + 60 * c.stab_power)
 						end
-					end	
+					else
+						local gec = EntityGetFirstComponent(effects[1], "GameEffectComponent")
+						if gec ~= nil then
+							ComponentSetValue2(gec, "frames", 250 + 60 * c.stab_power)
+						end
+					end
 					c.fire_rate_wait = c.fire_rate_wait + 48
 					current_reload_time = current_reload_time + 48
 				else
@@ -84,6 +89,7 @@ local new_actions = {
 							local temperature = math.min(5 + c.stab_power, 10)
 							local duration = 540 + 120 * c.stab_power
 							InflictMagicFire(stab_target, temperature, duration, 10)
+							AddHeat(temperature * 3, caster)
 						end
 						local damage = 4 * c.stab_stab_stab
 						EntityInflictDamage(stab_target, damage * 0.43, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
@@ -135,7 +141,7 @@ local new_actions = {
 						local effect_entity = LoadGameEffectEntityTo(caster, "mods/stab/files/entities/misc/effect_misericorde/effect.xml")
 						local comp_mis_amt = EntityGetFirstComponentIncludingDisabled(effect_entity, "VariableStorageComponent", "mis_amt")
 						if comp_mis_amt ~= nil then
-							ComponentSetValue2(comp_mis_amt, "value_float", 0.4 + 0.15 * c.stab_power)
+							ComponentSetValue2(comp_mis_amt, "value_float", 0.3 + 0.15 * c.stab_power)
 						end
 					end	
 					c.fire_rate_wait = c.fire_rate_wait + 84

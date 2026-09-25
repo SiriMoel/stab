@@ -43,7 +43,6 @@ for _,path in ipairs(bosses) do
     end
 end
 
-
 function OnModPostInit()
 	if ModIsEnabled("foolish_flame") then
 		ModLuaFileAppend("mods/foolish_flame/files/scripts/bounty_rewards.lua", "mods/stab/files/scripts/ff_bounty_rewards.lua")

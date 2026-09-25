@@ -143,7 +143,7 @@ mod_settings = {
     },
     {
         category_id = "stab_spells",
-        ui_name = "Stab! Spells",
+        ui_name = "Spells",
         ui_description = "Toggle the spells of this mod.",
         foldable = true,
         _folded = true,

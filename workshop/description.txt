@@ -3,7 +3,7 @@ When using these spells, a raised wand will appear as an indicator that you are 
 
 The mod adds [b]8[/b] spells, which can each be toggled on/off in the mod's settings.
 Here's an example of one:
-[big earner]
+[img]https://imgur.com/sfGQOLq.png[/img]
 
 The spells only cost mana and apply the recharge and cast delay time penalties when you Stab!, so you don't have to worry about them ruining your wands (they also cast the next spell, so they can be slotted in freely).
 
@@ -11,8 +11,8 @@ The spells can be acquired from Noita's bosses.
 If Foolish Flame is enabled, the spells can also be acquired from hell bounties.
 
 Cross-mod interactions:
-[b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3795285917]Foolish Flame[/url][/b] A new heat gauge, and the 'Stabbing Fire' spell inflicts magic fire on Stab!
-[b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3313573016]Souls[/url][/b] The 'Essence Extractor' spell grants souls on Stab!
+[b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3795285917]Foolish Flame[/url][/b] A new heat gauge, and the 'Stabbing Fire' spell grants heat and inflicts magic fire.
+[b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3313573016]Souls[/url][/b] The 'Essence Extractor' spell grants souls.
 
 Discord: https://discord.gg/FKaRA9HMUq
 Github: https://github.com/SiriMoel/stab

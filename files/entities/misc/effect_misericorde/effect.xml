@@ -22,7 +22,7 @@
 	<VariableStorageComponent
 		_tags="mis_amt"
 		name="mis_amt"
-		value_float="0.4"
+		value_float="0.3"
 	></VariableStorageComponent>
 
 	<VariableStorageComponent

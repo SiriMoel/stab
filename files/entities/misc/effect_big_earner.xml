@@ -5,7 +5,7 @@
     
     <GameEffectComponent 
     	effect="MOVEMENT_FASTER_2X"
-    	frames="300"
+    	frames="250"
     ></GameEffectComponent>
 	
 	<UIIconComponent

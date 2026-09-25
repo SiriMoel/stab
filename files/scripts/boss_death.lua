@@ -23,7 +23,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
     end
 
     if name == "$animal_parallel_alchemist" or name == "$animal_parallel_tentacles" then
-        local num = Random(1, 7)
+        local num = Random(1, 6)
         local opts = {}
         if num <= 4 then
             local possible_opts = {"STABAGE", "POWER"}

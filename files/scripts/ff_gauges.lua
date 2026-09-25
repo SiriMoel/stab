@@ -1,4 +1,4 @@
-    local gauges_to_add = {
+local gauges_to_add = {
     {
         id = "stab",
         name = "$stab_ff_gauge",
