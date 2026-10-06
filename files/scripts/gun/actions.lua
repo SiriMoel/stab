@@ -257,13 +257,16 @@ local new_actions = {
 						if ModIsEnabled("souls") then
 							SetRandomSeed(x, y)
 							dofile_once("mods/souls/files/scripts/souls.lua")
-							ReapSoul(stab_target, Random(1, 3), false)
+							local souls = {}
+							local soul_type = GetEntitySoulType(stab_target)
+							souls[soul_type] = Random(1, 3 + c.stab_power)
+							DontFearTheReaper(souls, stab_target)
 						end
 						local damage = 2.4 * c.stab_stab_stab
 						EntityInflictDamage(stab_target, damage, "DAMAGE_SLICE", "", "BLOOD_EXPLOSION", 1, 1, caster, nil, nil, 2)
 					end
 					local effects = EntityGetAllChildren(caster, "stab_effect_buff") or {}
-					local max = math.min(5 + c.stab_power, 14)
+					local max = math.min(3 + c.stab_power, 14)
 					if #effects < max then
 						local effect = EntityLoad("mods/stab/files/entities/misc/effect_buff.xml", x, y)
 						EntityAddChild(caster, effect)

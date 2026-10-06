@@ -1,0 +1,8 @@
+NEW
+- ???
+
+CHANGED/FIXED
+- ???
+
+INTERNAL
+- Updated Essence Extractor spell to use new Souls functions
