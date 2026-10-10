@@ -5,4 +5,4 @@ CHANGED/FIXED
 - ???
 
 INTERNAL
-- Updated Essence Extractor spell to use new Souls functions
+- Updated Essence Extractor spell to work with the Souls update

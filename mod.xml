@@ -2,7 +2,7 @@
 	name="Stab!"
 	description="A handful of spells used for close-range attacks."
 	request_no_api_restrictions="0" 
-	version="1.0"
+	version="1.0.1"
 	icon="icon.png"
 	author="Moldos"
 ></Mod>
